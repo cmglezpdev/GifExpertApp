@@ -1,70 +1,96 @@
-# Getting Started with Create React App
+# GifExpertApp
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Esta aplicación de React es básica, y es la segunda aplicación del curso de React de Fernando Herrera, por lo que en ella se usan los conceptos básicos sobre las componentes, como comunicar las mismas y algunas cosas sencillas de los Hooks. También implementa mi primer Custom Hook.
 
-## Available Scripts
+La aplicación no está muy bien trabajada con css, ya que el objetivo era aprender React.
 
-In the project directory, you can run:
+(Demas partes de Curso)[]
 
-### `npm start`
+### Mas sobre React
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**1. Componentes**
+Una componente es una pequeña porción de códido reutilizable que se encarga de renderizar una parte de la aplicación. Se puede dividir por funcionalidades y puedes tener tantas componentes como necesites. Estas tambien pueden tener estados, por lo que cada vez que un estado cambia(que el html cambie por ejemplo) este es capaz de renderizar solo la parte que cambió, haciendolo muy eficientemente.
+Una componente es una función común y corriente de JavaScript que siempre retorna código html.
+Ejemplos:
+    **GifExpectApp** Renderiza toda la aplicación
+    **AddCategory** Se encarga de leer el input y de avisar cuando se introduce una nueva búsqueda
+    **GifGrid** Renderiza todos gifs apoyandose de `GifGridItem`
+    **GifGridItem** Renderiza cada uno de los gifs
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+**2. Hooks**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Hasta ahora usamos dos Hooks que vienen con React
 
-### `npm run build`
+**useSate** crea un nuevo estado el cual solo se podrá modificar con su función correspondiente, e inmediatamente React sabra que tiene que actualizar el html pero solo en las partes donde aparezca esa variable.
+    
+```js
+    // nuevo estado categories inicializado con "One Piece" y su funcion modificadora setCategories
+    const [categories, setCategories] = useState( ["One Piece"] );
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    // modificar el estado
+    setState( "One Push Man" );
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**useEffect** ejecuta una acción cada vez que se renderiza el componente, a menos que especifiques otra cosa. Por ejemplo:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```js
+    useEffect( () => {
+        getGifs( category )
+            .then(img => {
+                setState({
+                    data: img,
+                    loading: false
+                })
+            });
+    }, [category]);  // Solo se vuelve a ejecutar si category cambia
+```
 
-### `npm run eject`
+Este ejecuta su función solo cuando alguno de los estados dentro del arreglo cambia, evitando asi tener que ejecutar la función innecesariamente, ayudando a la optimización de nuestro código.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**3. Custom Hooks**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+No son mas que una forma de extraer la lógica de un componente en funciones reutilizables para que sea mas sencillo su uso. Pueden tener estados y se construyen usando una función común y corriente de javascript.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Un ejemplo es el hook que creamos de `useFetchGifs` que se encarga de actualizar la lista de búsquedas realizadas por el usuario cada vez que se realiza una nueva, o sea, que su estado cambie.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```js
+const useFetchGifs = ( category ) => {
 
-## Learn More
+    const [state, setState] = useState({
+        data: [],
+        loading: true
+    });
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+    useEffect( () => {
+        getGifs( category )
+            .then(img => {
+                setState({
+                    data: img,
+                    loading: false
+                })
+            });
+    }, [category]);
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    return state;
+}
+```
 
-### Code Splitting
+Podemos ver que ese crea un estado nuevo usando `useState`, y haciendo uso de `useEffect` actualizamos la lista de imagenes a mostrar si la categoría que recibimos como argumento ha cambiado.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+### Instalacion
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Es muy simple de instalar para ejecutarlo en tu pc solo con estos dos pasos:
 
-### Making a Progressive Web App
+**1. Instalar dependencias**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+``` bash
+npm install
+```
 
-### Advanced Configuration
+**2. Correr aplicación**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+npm start
+```
