@@ -4,7 +4,7 @@ Esta aplicación de React es básica, y es la segunda aplicación del curso de R
 
 La aplicación no está muy bien trabajada con css, ya que el objetivo era aprender React.
 
-(Demas partes de Curso)[]
+[Demas partes de Curso](https://github.com/cmglezpdev/Guide-React-Course)
 
 ### Mas sobre React
 
