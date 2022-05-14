@@ -6,6 +6,8 @@ La aplicación no está muy bien trabajada con css, ya que el objetivo era apren
 
 ## Aplicación
 
+![screen](./screenshot.png)
+
 Esta aplicación es un sencillo buscador de gifs usando esta [API](https://developers.giphy.com/), la cual nos proporciona muchos gifs que luego en la aplicación mostramos, en base a las busquedas realizadas por el usuario.
 
 Tambien uso un poquito la libreria de css [animate.css](https://animate.style/), la cual nos proporciona muchas animaciones chulas, simplificando bastante el trabajo.
