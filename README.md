@@ -23,41 +23,41 @@ Una componente es una función común y corriente de JavaScript que siempre reto
 
 Ejemplos:
 
-    **GifExpectApp** Renderiza toda la aplicación
+**GifExpectApp:** Renderiza toda la aplicación.
 
-    **AddCategory** Se encarga de leer el input y de avisar cuando se introduce una nueva búsqueda
+**AddCategory:** Se encarga de leer el input y de avisar cuando se introduce una nueva búsqueda.
 
-    **GifGrid** Renderiza todos gifs apoyandose de `GifGridItem`
+**GifGrid:** Renderiza todos gifs apoyandose de `GifGridItem`.
 
-    **GifGridItem** Renderiza cada uno de los gifs
+**GifGridItem:** Renderiza cada uno de los gifs.
 
 
 ### 2. Hooks
 
 Hasta ahora usamos dos Hooks que vienen con React
 
-**- useSate** crea un nuevo estado el cual solo se podrá modificar con su función correspondiente, e inmediatamente React sabra que tiene que actualizar el html pero solo en las partes donde aparezca esa variable.
+**useSate:** crea un nuevo estado el cual solo se podrá modificar con su función correspondiente, e inmediatamente React sabra que tiene que actualizar el html pero solo en las partes donde aparezca esa variable.
     
 ```js
-    // nuevo estado categories inicializado con "One Piece" y su funcion modificadora setCategories
-    const [categories, setCategories] = useState( ["One Piece"] );
+// nuevo estado categories inicializado con "One Piece" y su funcion modificadora setCategories
+const [categories, setCategories] = useState( ["One Piece"] );
 
-    // modificar el estado
-    setState( "One Push Man" );
+// modificar el estado
+setState( "One Push Man" );
 ```
 
-**- useEffect** ejecuta una acción cada vez que se renderiza el componente, a menos que especifiques otra cosa. Por ejemplo:
+**useEffect:** ejecuta una acción cada vez que se renderiza el componente, a menos que especifiques otra cosa. Por ejemplo:
 
 ```js
-    useEffect( () => {
-        getGifs( category )
-            .then(img => {
-                setState({
-                    data: img,
-                    loading: false
-                })
-            });
-    }, [category]);  // Solo se vuelve a ejecutar si category cambia
+useEffect( () => {
+    getGifs( category )
+        .then(img => {
+            setState({
+                data: img,
+                loading: false
+            })
+        });
+}, [category]);  // Solo se vuelve a ejecutar si category cambia
 ```
 
 Este ejecuta su función solo cuando alguno de los estados dentro del arreglo cambia, evitando asi tener que ejecutar la función innecesariamente, ayudando a la optimización de nuestro código.
