@@ -12,8 +12,6 @@ Esta aplicación es un sencillo buscador de gifs usando esta [API](https://devel
 
 Tambien uso un poquito la libreria de css [animate.css](https://animate.style/), la cual nos proporciona muchas animaciones chulas, simplificando bastante el trabajo.
 
-[Demas partes de Curso](https://github.com/cmglezpdev/Guide-React-Course)
-
 ## Mas sobre React
 
 ### 1. Componentes
@@ -36,7 +34,7 @@ Ejemplos:
 
 Hasta ahora usamos dos Hooks que vienen con React
 
-**useSate:** crea un nuevo estado el cual solo se podrá modificar con su función correspondiente, e inmediatamente React sabra que tiene que actualizar el html pero solo en las partes donde aparezca esa variable.
+**useSate:** crea un nuevo estado el cual solo se podrá modificar con su función correspondiente, y React sabra que partes del codigo volver a renderizar
     
 ```js
 // nuevo estado categories inicializado con "One Piece" y su funcion modificadora setCategories
